@@ -5,7 +5,7 @@ function UsersList({ usersList, searchText }) {
   const [checked, setChecked] = useState(false)
   const [itemsSelected, setItemsSelected] = useState([]);
   const [users, updateUsersList] = useState(usersList);
-  const [isUserChecked, updateUserChecked] = useState([])
+  // const [isUserChecked, updateUserChecked] = useState([])
   // const [filteredUsers, updateFilterUsers] = useState(users)
 
   // const searchUser = () => {
@@ -16,10 +16,11 @@ function UsersList({ usersList, searchText }) {
   useEffect( () => {
     const usersSortedAlphabetically = usersList && usersList.sort((a, b) => a.last_name > b.last_name ? 1 : -1);
     usersSortedAlphabetically.forEach(user => {
-      user.checked = isUserChecked.includes(user.id) ? true : false
+      user.checked = itemsSelected.includes(user.id) ? true : false
+      user.checked = itemsSelected.includes(user.id) ? console.log(true) : console.log(false)
     });
     updateUsersList(usersSortedAlphabetically)
-  }, [isUserChecked, usersList] 
+  }, [itemsSelected, usersList] 
   )
 
   
@@ -37,7 +38,7 @@ function UsersList({ usersList, searchText }) {
       // const {first_name, last_name, avatar, id} = user
       console.log(user)
       return (
-        <User {...{ key:user.id, user, checkboxChecked:checked, setChecked, itemsSelected, setItemsSelected, isUserChecked, updateUserChecked }} />
+        <User {...{ key:user.id, user, checkboxChecked:checked, setChecked, itemsSelected, setItemsSelected }} />
       )
     })}
 
