@@ -2,18 +2,25 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@material-ui/cor
 import React, { useState } from 'react';
 import CheckboxComponent from './Checkbox';
 
-function User({firstName, lastName, avatar, id, itemsSelected, setItemsSelected, checked, setChecked  }) {
-  const [ischecked, setisChecked] = useState(checked)
+function User({user, itemsSelected, setItemsSelected, checkboxChecked, setChecked, isUserChecked, updateUserChecked }) {
+  const [isChecked, setisChecked] = useState(checkboxChecked)
+
+  const {first_name, last_name, avatar, id} = user
+
 
   const toggleCheckbox = () => {
-    setisChecked(!ischecked)
-    setChecked(!ischecked)
-      if (!ischecked) {
+    setisChecked(!isChecked)
+    setChecked(!isChecked)
+      if (!isChecked) {
         setItemsSelected([
           ...itemsSelected, id
         ])
+        updateUserChecked([
+          ...isUserChecked, id
+        ])
      } else {
       setItemsSelected(itemsSelected.filter(item => item !== id))
+      updateUserChecked(isUserChecked.filter(user => user !== id))
      }
   }
 
@@ -24,9 +31,9 @@ function User({firstName, lastName, avatar, id, itemsSelected, setItemsSelected,
       </Avatar>
     </ListItemAvatar>
     <ListItemText 
-    primary={`${firstName} ${lastName}`}
+    primary={`${first_name} ${last_name}`}
     />
-    <CheckboxComponent onClick={toggleCheckbox} checked={ischecked} />
+    <CheckboxComponent isChecked={isChecked} />
   </ListItem>
   );
 }
