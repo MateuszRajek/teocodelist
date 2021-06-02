@@ -16,6 +16,7 @@ const [searchInputValue, setSearchInputValue] = useState('')
   useEffect(() => {
     getAndDisplayUsersList()}, [])
 
+
   return (
     <Container maxWidth='md' styles={{paddingTop: '10px'}}>
       <SearchingBar setSearchInputValue={setSearchInputValue} />

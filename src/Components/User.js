@@ -2,7 +2,7 @@ import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@material-ui/cor
 import React, { useState } from 'react';
 import CheckboxComponent from './Checkbox';
 
-function User({firstName, lastName, avatar, id, itemsSelected,  setItemsSelected, checked, setChecked  }) {
+function User({firstName, lastName, avatar, id, itemsSelected, setItemsSelected, checked, setChecked  }) {
   const [ischecked, setisChecked] = useState(checked)
 
   const toggleCheckbox = () => {
