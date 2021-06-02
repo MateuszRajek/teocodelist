@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import CheckboxComponent from './Checkbox';
 
 function User({firstName, lastName, avatar, id, itemsSelected,  setItemsSelected, checked, setChecked  }) {
-  const [ischecked, setisChecked] = useState(checked)
+  const [isChecked, setisChecked] = useState(checked)
 
   const toggleCheckbox = () => {
-    setisChecked(!ischecked)
-    setChecked(!ischecked)
-      if (!ischecked) {
+    setisChecked(!isChecked)
+    setChecked(!isChecked)
+      if (!isChecked) {
         setItemsSelected([
           ...itemsSelected, id
         ])
@@ -26,7 +26,7 @@ function User({firstName, lastName, avatar, id, itemsSelected,  setItemsSelected
     <ListItemText 
     primary={`${firstName} ${lastName}`}
     />
-    <CheckboxComponent onClick={toggleCheckbox} checked={ischecked} />
+    <CheckboxComponent isChecked={isChecked} />
   </ListItem>
   );
 }

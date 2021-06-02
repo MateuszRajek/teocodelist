@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Checkbox } from '@material-ui/core';
 
-function CheckboxComponent({onClick, isChecked}) {
+function CheckboxComponent({ isChecked }) {
   const [checked, setCheckboxState] = useState(isChecked)
 
   const toggleCheckbox = () => {
     setCheckboxState(!checked);
-    onClick()
   }
  
   return (
