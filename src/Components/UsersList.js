@@ -4,7 +4,7 @@ import User from './User';
 function UsersList({ usersList, searchText }) {
   const [itemsSelected, setItemsSelected] = useState([]);
   const [users, updateUsersList] = useState(usersList);
-  const [filteredUsers, setFilteredUsers] = useState([])
+  const [filteredUsers, setFilteredUsers] = useState(users)
   
   useEffect( () => {
     const usersSortedAlphabetically = usersList && usersList.sort((a, b) => a.last_name > b.last_name ? 1 : -1);
