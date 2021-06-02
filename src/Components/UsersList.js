@@ -2,55 +2,33 @@ import React, { useEffect, useState } from 'react';
 import User from './User';
 
 function UsersList({ usersList, searchText }) {
-  const [checked, setChecked] = useState(false)
   const [itemsSelected, setItemsSelected] = useState([]);
   const [users, updateUsersList] = useState(usersList);
-  // const [isUserChecked, updateUserChecked] = useState([])
-  // const [filteredUsers, updateFilterUsers] = useState(users)
-
-  // const searchUser = () => {
-  //   const searchedUsers = usersList && usersList.filter(user => user.first_name.toLowerCase().includes(searchText) || user.last_name.toLowerCase().includes(searchText))
-  //   updateUsersList(searchedUsers)
-  // }
+  const [filteredUsers, setFilteredUsers] = useState([])
   
   useEffect( () => {
     const usersSortedAlphabetically = usersList && usersList.sort((a, b) => a.last_name > b.last_name ? 1 : -1);
-    usersSortedAlphabetically.forEach(user => {
+    usersList && usersSortedAlphabetically.forEach(user => {
       user.checked = itemsSelected.includes(user.id) ? true : false
-      user.checked = itemsSelected.includes(user.id) ? console.log(true) : console.log(false)
     });
     updateUsersList(usersSortedAlphabetically)
-  }, [itemsSelected, usersList] 
+    const searchedUsers = users && users.filter(user => user.first_name.toLowerCase().includes(searchText) || user.last_name.toLowerCase().includes(searchText))
+    setFilteredUsers(searchedUsers)
+  }, [itemsSelected, usersList, searchText, users] 
   )
-
-  
-  // const usersSortedAlphabetically = usersList && usersList.sort((a, b) => a.last_name > b.last_name ? 1 : -1);
-  // const searchedUsers = users && users.filter(user => user.first_name.toLowerCase().includes(searchText) || user.last_name.toLowerCase().includes(searchText))
 
   //wyświetla listę zanaczonych userów
   console.log(itemsSelected)
-  console.log(users)
 
   return (
     <>
-    {users && users.map(user => {
-      
-      // const {first_name, last_name, avatar, id} = user
-      console.log(user)
+    {filteredUsers && filteredUsers.map(user => {
       return (
-        <User {...{ key:user.id, user, checkboxChecked:checked, setChecked, itemsSelected, setItemsSelected }} />
+
+        <User {...{ key:user.id, user, checked: user.checked ? true : false, itemsSelected, setItemsSelected }} />
       )
     })}
-
-    {/* {!filteredUsers && <p>Loading...</p>} */}
-    {/* {searchText && usersList && filteredUsers.map(user => {
-      const {first_name, last_name, avatar, id} = user
-      return (
-        <User {...{ key:id, firstName:first_name, lastName:last_name, avatar, id, checked, setChecked, itemsSelected, setItemsSelected }} />
-      )
-    })} */}
-    </>
-      
+    </> 
   );
 }
 
